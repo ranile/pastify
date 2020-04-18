@@ -1,7 +1,7 @@
 <template>
     <div class="nav">
         <img class="logo" alt="Logo" src="../assets/logo.png" />
-        <h1 class="title">Pastes</h1>
+        <h1 class="title">Pastify</h1>
     </div>
 </template>
 
