@@ -62,7 +62,7 @@
 
     function save(paste) {
         console.log(paste.content)
-        localStorage.setItem("content", paste.content)
+        localStorage.setItem("paste", JSON.stringify(paste))
     }
 
     // noinspection JSUnusedGlobalSymbols
