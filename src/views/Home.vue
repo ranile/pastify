@@ -1,18 +1,83 @@
+<!--suppress HtmlFormInputWithoutLabel -->
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+    <div class="home">
+        <!--    <span>{{paste.author}}</span>-->
+        <textarea class="paste-input" v-model="paste.content"></textarea>
+        <div class="preview">
+            <h3 class="preview-title">Preview: </h3>
+            <vue-markdown :source="paste.content"></vue-markdown>
+        </div>
+
+        <div class="buttons">
+            <button class="button" v-on:click="save(paste)">Save</button>
+            <button class="button">Reset</button>
+        </div>
+    </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+<style lang="scss">
+    .home {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0.5rem;
 
-export default {
-  name: "Home",
-  components: {
-    HelloWorld
-  }
-};
+        .paste-input {
+            background-color: #252525;
+            font-family: Monospaced, monospace;
+            color: white;
+            height: 50vh;
+        }
+
+        .preview {
+            padding: 0.5em;
+            margin-top: 0.5em;
+        }
+
+        .separator {
+            flex: 1 1 auto;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 1.5em;
+            align-self: flex-end;
+        }
+
+        .button {
+            background: #00000e;
+            border-radius: 10pt;
+
+            :focus {
+                outline: orange !important; /*TODO: This doesn't work, fix it*/
+            }
+        }
+    }
+</style>
+
+<script>
+
+    import {Paste} from "@/models/Paste";
+    import VueMarkdown from 'vue-markdown'
+
+    function save(paste) {
+        console.log(paste.content)
+        localStorage.setItem("content", paste.content)
+    }
+
+    // noinspection JSUnusedGlobalSymbols
+    export default {
+        name: "Home",
+        data: function () {
+            return {
+                paste: new Paste('', '')
+            }
+        },
+        methods: {
+            save: save
+        },
+        components: {
+            VueMarkdown
+        }
+    };
 </script>
