@@ -10,6 +10,7 @@
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: #d7d7d7;
 }
 
 body {
@@ -20,7 +21,6 @@ body {
     padding: 0;
     margin: 0;
     border: none;
-    color: #d7d7d7;
 }
 </style>
 

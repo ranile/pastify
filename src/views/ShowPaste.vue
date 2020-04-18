@@ -1,12 +1,28 @@
 <template>
     <div>
-        <vue-markdown v-if="!loading">{{ paste.content }}</vue-markdown>
+        <span v-if="!loading" v-html="renderMd(paste.content)"></span>
     </div>
 </template>
 
 <script>
-import VueMarkdown from 'vue-markdown'
 import { fetchPaste } from '../services/PastesService'
+import MarkdownIt from 'markdown-it'
+import hljs from 'highlight.js'
+
+function renderMd(text) {
+    return MarkdownIt({
+        highlight: function(str, lang) {
+            if (lang) {
+                try {
+                    return hljs.highlight(lang, str).value
+                } catch (e) {
+                    console.log(e)
+                }
+            }
+            return '' // use external default escaping
+        },
+    }).render(text)
+}
 
 export default {
     name: 'ShowPaste',
@@ -22,8 +38,8 @@ export default {
         console.log(this.paste)
         this.loading = false
     },
-    components: {
-        VueMarkdown,
+    methods: {
+        renderMd,
     },
 }
 </script>

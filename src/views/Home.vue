@@ -5,7 +5,7 @@
         <textarea class="paste-input" v-model="content"></textarea>
         <div class="preview">
             <h3 class="preview-title">Preview:</h3>
-            <vue-markdown :source="content"></vue-markdown>
+            <span v-html="renderMd(content)"></span>
         </div>
 
         <div class="buttons">
@@ -45,9 +45,10 @@
     }
 
     .button {
-        background: #00000e;
+        background: #ffffd0;
         border-radius: 10pt;
-
+        width: 100%;
+        color: black;
         :focus {
             outline: orange !important; /*TODO: This doesn't work, fix it*/
         }
@@ -56,13 +57,17 @@
 </style>
 
 <script>
-import VueMarkdown from 'vue-markdown'
+import MarkdownIt from 'markdown-it'
 import { createPaste } from '@/services/PastesService'
 
 function save(paste) {
     console.log(paste)
     localStorage.setItem('paste', JSON.stringify(paste))
     createPaste(paste).then(it => console.log(it))
+}
+const mdit = MarkdownIt()
+function renderMd(text) {
+    return mdit.render(text)
 }
 
 // noinspection JSUnusedGlobalSymbols
@@ -74,10 +79,8 @@ export default {
         }
     },
     methods: {
-        save: save,
-    },
-    components: {
-        VueMarkdown,
+        save,
+        renderMd,
     },
 }
 </script>
