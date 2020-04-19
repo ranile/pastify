@@ -1,6 +1,11 @@
 <template>
-    <div>
-        <span v-if="!loading" v-html="renderMd(paste.content)"></span>
+    <div class="show-paste">
+        <Navbar />
+        <div
+            class="content"
+            v-if="!loading"
+            v-html="renderMd(paste.content)"
+        ></div>
     </div>
 </template>
 
@@ -8,6 +13,7 @@
 import { fetchPaste } from '../services/PastesService'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
+import Navbar from '../components/Navbar'
 
 function renderMd(text) {
     return MarkdownIt({
@@ -26,6 +32,7 @@ function renderMd(text) {
 
 export default {
     name: 'ShowPaste',
+    components: { Navbar },
     data() {
         return {
             loading: true,
@@ -44,4 +51,9 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style lang="scss">
+p,
+pre {
+    padding: 0.5rem;
+}
+</style>

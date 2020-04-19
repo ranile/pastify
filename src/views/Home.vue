@@ -1,17 +1,20 @@
 <!--suppress HtmlFormInputWithoutLabel -->
 <template>
     <div class="home">
-        <!--    <span>{{paste.author}}</span>-->
-        <textarea class="paste-input" v-model="content"></textarea>
-        <div class="preview">
-            <h3 class="preview-title">Preview:</h3>
-            <span v-html="renderMd(content)"></span>
-        </div>
+        <nav class="navbar">
+            <NavBar />
+            <span class="separator"></span>
+            <div class="buttons">
+                <button class="button" v-on:click="save(content)">Save</button>
+                <button class="button">Reset</button>
+            </div>
+        </nav>
 
-        <div class="buttons">
-            <button class="button" v-on:click="save(content)">Save</button>
-            <button class="button">Reset</button>
-        </div>
+        <textarea
+            class="paste-input"
+            v-model="content"
+            spellcheck="false"
+        ></textarea>
     </div>
 </template>
 
@@ -19,39 +22,42 @@
 .home {
     display: flex;
     flex-direction: column;
-    margin-top: 0.5rem;
+
+    .navbar {
+        display: flex;
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            align-self: center;
+            margin-right: 1rem;
+        }
+
+        .separator {
+            flex: 1 1 auto;
+        }
+
+        .button {
+            background: transparent;
+            box-shadow: 0 0 0 1.5pt #226699;
+            color: #d7d7d7;
+            font-size: 1rem;
+            border-radius: 5pt;
+            padding: 0.3em 1em 0.3em 1em;
+            width: 100%;
+            height: 70%;
+            :focus {
+                outline: orange !important; /*TODO: This doesn't work, fix it*/
+            }
+        }
+    }
 
     .paste-input {
         background-color: #252525;
         font-family: Monospaced, monospace;
         color: white;
-        height: 50vh;
-    }
-
-    .preview {
+        height: 90vh;
         padding: 0.5em;
-        margin-top: 0.5em;
-    }
-
-    .separator {
-        flex: 1 1 auto;
-    }
-
-    .buttons {
-        display: flex;
-        gap: 0.5rem;
-        font-size: 1.5em;
-        align-self: flex-end;
-    }
-
-    .button {
-        background: #ffffd0;
-        border-radius: 10pt;
-        width: 100%;
-        color: black;
-        :focus {
-            outline: orange !important; /*TODO: This doesn't work, fix it*/
-        }
     }
 }
 </style>
@@ -59,6 +65,7 @@
 <script>
 import MarkdownIt from 'markdown-it'
 import { createPaste } from '@/services/PastesService'
+import NavBar from '@/components/Navbar.vue'
 
 function save(paste) {
     console.log(paste)
@@ -81,6 +88,9 @@ export default {
     methods: {
         save,
         renderMd,
+    },
+    components: {
+        NavBar,
     },
 }
 </script>

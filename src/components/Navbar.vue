@@ -1,6 +1,10 @@
 <template>
     <div class="nav">
-        <img class="logo" alt="Logo" src="../assets/logo.png" />
+        <img
+            class="logo"
+            alt="Logo"
+            src="https://discordapp.com/assets/ebff6c97250daa98236fb09f024cb6a2.svg"
+        />
         <h1 class="title">Pastify</h1>
     </div>
 </template>
@@ -8,22 +12,20 @@
 <style lang="scss">
 .nav {
     display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: flex-start;
-    height: 5vh;
+    align-items: center;
+    margin: 0.5rem;
 
     .logo {
-        width: 3vh;
-        height: 3vh;
-        align-self: center;
+        width: 2em;
+        height: 2em;
+        vertical-align: middle;
     }
 
     .title {
         margin-left: 0.5rem;
         font-size: 1.6em;
-        align-self: center;
         font-weight: bold;
+        vertical-align: middle;
     }
 }
 </style>
