@@ -67,11 +67,6 @@ import MarkdownIt from 'markdown-it'
 import { createPaste } from '@/services/PastesService'
 import NavBar from '@/components/Navbar.vue'
 
-function save(paste) {
-    console.log(paste)
-    localStorage.setItem('paste', JSON.stringify(paste))
-    createPaste(paste).then(it => console.log(it))
-}
 const mdit = MarkdownIt()
 function renderMd(text) {
     return mdit.render(text)
@@ -86,7 +81,13 @@ export default {
         }
     },
     methods: {
-        save,
+        save: function(paste) {
+            createPaste(paste).then(it => {
+                this.$router.push({
+                    path: `show/${it.id}`,
+                })
+            })
+        },
         renderMd,
     },
     components: {
