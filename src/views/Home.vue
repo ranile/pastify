@@ -6,7 +6,7 @@
             <span class="separator"></span>
             <div class="buttons">
                 <button class="button" v-on:click="save(content)">Save</button>
-                <button class="button">Reset</button>
+                <button class="button" v-on:click="reset">Reset</button>
             </div>
         </nav>
 
@@ -87,6 +87,9 @@ export default {
                     path: `show/${it.id}`,
                 })
             })
+        },
+        reset: function() {
+            this.content = ''
         },
         renderMd,
     },
