@@ -6,9 +6,10 @@ jobs:
         environment:
           ## this enables colors in the output
           TERM: xterm
-    working_directory: ~/web
+    working_directory: ~/pastify/web
     steps:
-      - checkout
+      - checkout:
+          path: ~/pastify
       - run:
           name: Install Dependencies
           command: npm ci
