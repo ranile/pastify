@@ -84,7 +84,7 @@ export default {
         save: function(paste) {
             createPaste(paste).then(it => {
                 this.$router.push({
-                    path: `show/${it.id}`,
+                    path: `show/${it}`,
                 })
             })
         },
