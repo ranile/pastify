@@ -12,10 +12,8 @@ describe('Create and show paste', () => {
             .contains('Save')
             .click()
 
-        cy.url().should('contain', '/show')
-
         // eslint-disable-next-line
-        cy.wait(1000) // This is so data is returned from firebase
+        cy.wait(5000) // This is so data is returned from firebase
 
         cy.get('#app')
             .get('.show-paste')

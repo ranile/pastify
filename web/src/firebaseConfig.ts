@@ -1,5 +1,5 @@
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
+import * as firebase from 'firebase/app'
+import 'firebase/firestore'
 
 // firebase init goes here
 const config = {
@@ -21,8 +21,4 @@ const Timestamp = firebase.firestore.Timestamp
 // firebase collections
 const pastesCollection = db.collection('pastes')
 
-export {
-    Timestamp,
-    db,
-    pastesCollection,
-}
+export { Timestamp, db, pastesCollection }

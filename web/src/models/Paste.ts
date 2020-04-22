@@ -5,18 +5,20 @@ export class Paste {
         public content: string,
         public id: string,
         public createdAt: Date,
-        public author?: string,
+        public author?: string
     ) {}
 
-    static async fromDocument(doc: firebase.firestore.DocumentReference): Promise<Paste> {
+    static async fromDocument(
+        doc: firebase.firestore.DocumentReference
+    ): Promise<Paste> {
         const data = (await doc.get()).data()
         if (data === undefined) {
-            throw Error("`data` is undefined????")
+            throw Error('`data` is undefined????')
         }
         return {
             content: data.content,
             id: doc.id,
-            createdAt: data.createdAt
+            createdAt: data.createdAt,
         }
     }
 }

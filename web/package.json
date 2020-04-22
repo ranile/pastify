@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --browser chromium",
+    "test": "start-server-and-test start http://localhost:8080 cypress:run"
   },
   "dependencies": {
     "core-js": "^3.6.4",
@@ -36,6 +39,7 @@
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
+    "start-server-and-test": "^1.11.0",
     "typescript": "~3.8.3",
     "vue-template-compiler": "^2.6.11"
   },
