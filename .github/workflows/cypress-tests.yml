@@ -10,7 +10,8 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     defaults:
-      working-directory: web
+      run:
+        working-directory: web
     steps:
       - name: Checkout
         uses: actions/checkout@v1
