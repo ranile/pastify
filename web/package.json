@@ -8,7 +8,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --browser chromium",
+    "cypress:run": "cypress run",
     "test": "start-server-and-test start http://localhost:8080 cypress:run"
   },
   "dependencies": {
