@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  discord: sandbox/discord@0.0.4
+  discord: sandbox/discord@x.y.zw
 
 
 jobs:
