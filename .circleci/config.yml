@@ -1,4 +1,9 @@
 version: 2
+
+orbs:
+  discord: sandbox/discord@0.0.4
+
+
 jobs:
   build:
     docker:
@@ -14,3 +19,4 @@ jobs:
           name: Install Dependencies
           command: npm ci
       - run: npm run test
+      - discord/status
