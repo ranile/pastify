@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json())
 
 admin.initializeApp({
-    credential: admin.credential.cert(require('/home/hamza/Documents/secrets/pastify-app-firebase-adminsdk-zdh08-2e37b0d316.json'))
+    credential: admin.credential.applicationDefault()
 })
 const firestore = admin.firestore()
 const pastes = firestore.collection('pastes')
