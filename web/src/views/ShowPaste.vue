@@ -10,9 +10,7 @@
             </div>
         </nav>
 
-        <pre>
-            <code class="content">{{ paste.content }}</code>
-        </pre>
+        <pre><code class="content">{{ paste.content }}</code></pre>
     </div>
 </template>
 
