@@ -10,11 +10,9 @@
             </div>
         </nav>
 
-        <div
-            class="content"
-            v-if="!loading"
-            v-html="renderMd(paste.content)"
-        ></div>
+        <pre>
+            <code class="content">{{ paste.content }}</code>
+        </pre>
     </div>
 </template>
 
@@ -44,7 +42,6 @@ export default {
     components: { Navbar },
     data() {
         return {
-            loading: true,
             paste: null,
         }
     },
@@ -52,10 +49,8 @@ export default {
         const id = this.$route.params.id
         this.paste = await fetchPaste(id)
         console.log(this.paste)
-        this.loading = false
     },
     methods: {
-        renderMd,
         copyAndEdit: function() {
             localStorage.setItem('initialContent', this.paste.content)
             this.$router.push('/')
@@ -65,8 +60,7 @@ export default {
 </script>
 
 <style lang="scss">
-p,
-pre {
+.content {
     padding: 0.5rem;
 }
 </style>

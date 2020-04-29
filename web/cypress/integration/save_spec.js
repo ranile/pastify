@@ -17,6 +17,7 @@ describe('Create and show paste', () => {
 
         cy.get('#app')
             .get('.show-paste')
+            .get('pre')
             .get('.content')
             .should('contain', myText)
     })
