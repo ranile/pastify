@@ -23,35 +23,6 @@
     display: flex;
     flex-direction: column;
 
-    .navbar {
-        display: flex;
-
-        .buttons {
-            display: flex;
-            gap: 1rem;
-            align-self: center;
-            margin-right: 1rem;
-        }
-
-        .separator {
-            flex: 1 1 auto;
-        }
-
-        .button {
-            background: transparent;
-            box-shadow: 0 0 0 1.5pt #226699;
-            color: #d7d7d7;
-            font-size: 1rem;
-            border-radius: 5pt;
-            padding: 0.3em 1em 0.3em 1em;
-            width: 100%;
-            height: 70%;
-            :focus {
-                outline: orange !important; /*TODO: This doesn't work, fix it*/
-            }
-        }
-    }
-
     .paste-input {
         background-color: #252525;
         font-family: Monospaced, monospace;
@@ -72,12 +43,15 @@ function renderMd(text) {
     return mdit.render(text)
 }
 
+const INITIAL_DATA_KEY = 'initialContent'
+
 // noinspection JSUnusedGlobalSymbols
 export default {
     name: 'Home',
     data: function() {
+        const initialData = localStorage.getItem(INITIAL_DATA_KEY)
         return {
-            content: '',
+            content: initialData ? initialData : '',
         }
     },
     methods: {
@@ -86,10 +60,12 @@ export default {
                 this.$router.push({
                     path: `show/${it}`,
                 })
+                localStorage.removeItem(INITIAL_DATA_KEY)
             })
         },
         reset: function() {
             this.content = ''
+            localStorage.removeItem(INITIAL_DATA_KEY)
         },
         renderMd,
     },

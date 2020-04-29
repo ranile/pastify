@@ -1,6 +1,15 @@
 <template>
     <div class="show-paste">
-        <Navbar />
+        <nav class="navbar">
+            <Navbar />
+            <span class="separator"></span>
+            <div class="buttons">
+                <button class="button" v-on:click="copyAndEdit">
+                    Copy and edit
+                </button>
+            </div>
+        </nav>
+
         <div
             class="content"
             v-if="!loading"
@@ -47,6 +56,10 @@ export default {
     },
     methods: {
         renderMd,
+        copyAndEdit: function() {
+            localStorage.setItem('initialContent', this.paste.content)
+            this.$router.push('/')
+        },
     },
 }
 </script>
