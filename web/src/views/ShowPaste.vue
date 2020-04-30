@@ -10,30 +10,13 @@
             </div>
         </nav>
 
-        <pre><code class="content">{{ paste.content }}</code></pre>
+        <pre class="content"><code>{{paste.content}}</code></pre>
     </div>
 </template>
 
 <script>
 import { fetchPaste } from '../services/PastesService'
-import MarkdownIt from 'markdown-it'
-import hljs from 'highlight.js'
 import Navbar from '../components/Navbar'
-
-function renderMd(text) {
-    return MarkdownIt({
-        highlight: function(str, lang) {
-            if (lang) {
-                try {
-                    return hljs.highlight(lang, str).value
-                } catch (e) {
-                    console.log(e)
-                }
-            }
-            return '' // use external default escaping
-        },
-    }).render(text)
-}
 
 export default {
     name: 'ShowPaste',
@@ -59,6 +42,6 @@ export default {
 
 <style lang="scss">
 .content {
-    padding: 0.5rem;
+    padding-left: 0.5rem;
 }
 </style>
