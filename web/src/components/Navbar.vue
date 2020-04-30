@@ -3,7 +3,7 @@
         <img
             class="logo"
             alt="Logo"
-            src="https://discordapp.com/assets/ebff6c97250daa98236fb09f024cb6a2.svg"
+            src="../assets/logo.svg"
         />
         <h1 class="title">Pastify</h1>
     </div>
