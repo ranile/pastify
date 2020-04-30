@@ -10,7 +10,7 @@
             </div>
         </nav>
 
-        <pre class="content"><code>{{paste.content}}</code></pre>
+        <pre class="content-pre"><code>{{paste.content}}</code></pre>
     </div>
 </template>
 
@@ -41,8 +41,10 @@ export default {
 </script>
 
 <style lang="scss">
-.content {
+.content-pre {
     padding-left: 0.5rem;
-    font-family: JetBrainsMono, monospace;
+    code {
+        font-family: JetBrainsMono, monospace;
+    }
 }
 </style>
