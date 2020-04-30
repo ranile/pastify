@@ -43,5 +43,6 @@ export default {
 <style lang="scss">
 .content {
     padding-left: 0.5rem;
+    font-family: JetBrainsMono, monospace;
 }
 </style>

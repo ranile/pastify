@@ -50,6 +50,11 @@ body {
         }
     }
 }
+
+@font-face {
+    font-family: 'JetBrainsMono', monospace;
+    src: url('assets/fonts/JetBrainsMono-Regular.woff');
+}
 </style>
 
 <script>

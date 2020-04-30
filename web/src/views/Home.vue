@@ -25,7 +25,7 @@
 
     .paste-input {
         background-color: #252525;
-        font-family: Monospaced, monospace;
+        font-family: 'JetBrainsMono', monospace;
         color: white;
         height: 90vh;
         padding: 0.5em;
@@ -34,14 +34,8 @@
 </style>
 
 <script>
-import MarkdownIt from 'markdown-it'
 import { createPaste } from '@/services/PastesService'
 import NavBar from '@/components/Navbar.vue'
-
-const mdit = MarkdownIt()
-function renderMd(text) {
-    return mdit.render(text)
-}
 
 const INITIAL_DATA_KEY = 'initialContent'
 
@@ -67,7 +61,6 @@ export default {
             this.content = ''
             localStorage.removeItem(INITIAL_DATA_KEY)
         },
-        renderMd,
     },
     components: {
         NavBar,
