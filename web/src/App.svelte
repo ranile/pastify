@@ -50,7 +50,7 @@
 
 <Router url="{url}">
     <div>
-        <Route path="/:id" component="{ShowPaste}"/>
+        <Route path="/show/:id" component="{ShowPaste}"/>
         <Route path="/">
             <Home/>
         </Route>

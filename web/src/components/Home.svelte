@@ -22,7 +22,7 @@
 
         const json = await resp.json()
         console.log(json)
-        navigate(`/${json.id}`, { replace: true })
+        navigate(`/show/${json.id}`, { replace: true })
 
     }
 

@@ -27,13 +27,7 @@
     <img
             class="logo"
             alt="Logo"
-            src="https://canary.discordapp.com/assets/7f56a6932ada40d5b3562468de2b0cde.svg"
+            src="/icon.svg"
     />
     <h1 class="title">Pastify</h1>
-    <nav>
-        <Link to="/">Home</Link>
-        <Link to="/xyz"><span class="name">
-            SHow
-        </span></Link>
-    </nav>
 </nav>
