@@ -2,12 +2,15 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as express from 'express';
 import * as bodyParser from "body-parser";
+import * as cors from 'cors';
 
 const app = express();
 app.use(bodyParser.json())
+app.use(cors())
 
 admin.initializeApp({
-    credential: admin.credential.cert(require('/home/hamza/Documents/secrets/pastify-app-firebase-adminsdk-zdh08-2e37b0d316.json'))
+    //credential: admin.credential.cert(require('/home/hamza/Documents/secrets/pastify-app-firebase-adminsdk-zdh08-2e37b0d316.json'))
+    credential: admin.credential.applicationDefault()
 })
 const firestore = admin.firestore()
 const pastes = firestore.collection('pastes')
@@ -16,7 +19,6 @@ const pastes = firestore.collection('pastes')
 app.get('/:id', async (request, response) => {
     const doc = await pastes.doc(request.params.id).get()
     const data = doc.data()
-    console.log(data)
     if (data === undefined) {
         response.sendStatus(404)
         return
@@ -29,9 +31,7 @@ app.get('/:id', async (request, response) => {
 })
 
 app.post('/', async (request, response) => {
-    const body = request.body
-    console.log(body)
-    const content = body.content
+    const content = request.body.content
     if (content === undefined) {
         response.sendStatus(400)
         return

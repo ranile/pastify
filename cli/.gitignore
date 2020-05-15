@@ -1,3 +1,5 @@
 build
 pastify_hamza1311.egg-info
 venv
+dist
+pastify/__pycache__/
