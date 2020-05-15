@@ -2,20 +2,12 @@
     import NavBar from './Navbar.svelte'
     import {onMount} from "svelte";
 
-    // language=kotlin
-    let content = `
-    fun main() {
-        println("Hello world")
-    }
-    `
+    let content = ''
 
     export let id;
-    let data;
     onMount(async () => {
-        console.log(id)
         const resp = await fetch(`https://us-central1-pastify-app.cloudfunctions.net/api/${id}`)
-        data = await resp.json()
-        console.log(data)
+        const data = await resp.json()
         content = data['content']
     });
 
@@ -24,15 +16,17 @@
 <main class="show-paste">
     <nav class="navbar">
         <NavBar/>
-        <span class="separator"></span>
-        <div class="buttons">
-            <button class="button">Copy and edit</button>
-        </div>
     </nav>
     <pre><code>{content}</code></pre>
 </main>
 
 
-<style>
+<style type="text/scss">
+    pre {
+        padding: 1em;
 
+        code {
+            font-size: 1.2em;
+        }
+    }
 </style>
