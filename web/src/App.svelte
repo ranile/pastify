@@ -9,7 +9,7 @@
 <style type="text/scss">
     :global(body) {
         color: rgb(215, 215, 215);
-        background: #121212;
+        background: #0b0b0b;
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

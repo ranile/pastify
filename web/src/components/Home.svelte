@@ -38,7 +38,7 @@
         flex-direction: column;
 
         .paste-input {
-            background-color: #181818;
+            background-color: #121212;
             font-family: 'JetBrainsMono', monospace;
             color: white;
             height: 90vh;

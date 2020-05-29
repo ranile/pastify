@@ -78,7 +78,7 @@
 <style type="text/scss">
     pre {
         padding: 1em;
-
+        background-color: #121212;
         code {
             font-size: 1.2em;
         }
