@@ -1,3 +1,4 @@
+<!--suppress HtmlUnknownTarget -->
 <svelte:head>
     <script src='/prism/prism.js'></script>
     <link rel='stylesheet' href='/prism/prism.css'>
@@ -10,6 +11,7 @@
     let content = ''
 
     export let id;
+    let isHighlighted = false
 
     onMount(async () => {
         const split = id.split('.')
@@ -69,8 +71,12 @@
                 config = [Prism.languages.sql, 'sql']
                 break;
         }
-        content = Prism.highlight(data['content'], config[0], config[1])
-        console.log(lang)
+        if (config.length === 2) {
+            content = Prism.highlight(data['content'], config[0], config[1])
+            isHighlighted = true
+        } else {
+            content = data['content']
+        }
     });
 
 </script>
@@ -91,5 +97,11 @@
         <NavBar/>
     </nav>
 
-    <pre><code>{@html content}</code></pre>
+    <pre><code>
+        {#if isHighlighted}
+            {@html content}
+        {:else}
+            {content}
+        {/if}
+    </code></pre>
 </main>
