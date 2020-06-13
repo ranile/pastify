@@ -14,12 +14,12 @@
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.2.2",
     "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.23.0"
+    "svelte": "^3.23.2"
   },
   "dependencies": {
-    "sass": "^1.26.7",
+    "sass": "^1.26.8",
     "sirv-cli": "^0.4.6",
-    "svelte-preprocess": "^3.7.4",
+    "svelte-preprocess": "^3.9.7",
     "svelte-routing": "^1.4.2"
   }
 }

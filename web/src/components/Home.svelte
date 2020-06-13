@@ -5,23 +5,16 @@
     let content = 'content'
 
     const save = async (content) => {
-        console.log(content)
-        const id = 'NFK8K1N5DCL5Kb7pU0WE'
-        const data = { content: content }
-        console.log(data)
-        const str = JSON.stringify(data)
-        console.log(str)
         const resp = await fetch('https://us-central1-pastify-app.cloudfunctions.net/api/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ content: content})
+            body: JSON.stringify({ content: content })
         });
 
         const json = await resp.json()
-        console.log(json)
         navigate(`/show/${json.id}`, { replace: true })
 
     }

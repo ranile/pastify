@@ -1,5 +1,5 @@
 <script>
-    import { Router, Link, Route } from "svelte-routing"
+    import { navigate } from "svelte-routing"
 </script>
 
 <style type="text/scss">
@@ -23,7 +23,7 @@
     }
 </style>
 
-<nav>
+<nav on:click={() => navigate("/")}>
     <img
             class="logo"
             alt="Logo"
