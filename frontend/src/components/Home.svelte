@@ -5,7 +5,7 @@
     let content = 'content'
 
     const save = async (content) => {
-        const resp = await fetch('https://us-central1-pastify-app.cloudfunctions.net/api/', {
+        const resp = await fetch('/api', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
