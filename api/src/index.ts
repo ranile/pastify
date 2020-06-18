@@ -43,4 +43,4 @@ app.get('/*', (request, response) => {
     response.sendFile(`${publicDir}/index.html`)
 })
 
-app.listen(5000, () => console.log('Listening on post 5000'))
+app.listen(process.env.PORT, () => console.log('Listening on post 5000'))
