@@ -7,12 +7,6 @@
     "start": "sirv public -s"
   },
   "devDependencies": {
-  },
-  "dependencies": {
-    "sass": "^1.26.8",
-    "sirv-cli": "^0.4.6",
-    "svelte-preprocess": "^3.9.7",
-    "svelte-routing": "^1.4.2",
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "node-sass": "^4.14.1",
@@ -21,5 +15,11 @@
     "rollup-plugin-svelte": "^5.2.2",
     "rollup-plugin-terser": "^5.1.2",
     "svelte": "^3.23.2"
+  },
+  "dependencies": {
+    "sass": "^1.26.8",
+    "sirv-cli": "^0.4.6",
+    "svelte-preprocess": "^3.9.7",
+    "svelte-routing": "^1.4.2"
   }
 }

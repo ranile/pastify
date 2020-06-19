@@ -6,7 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
-const publicDir = '../api/public'
+const publicDir = './public'
 
 export default {
     input: 'src/main.js',

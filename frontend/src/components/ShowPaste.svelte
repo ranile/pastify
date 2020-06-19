@@ -17,7 +17,7 @@
         const split = id.split('.')
         const lang = split[1]
 
-        const resp = await fetch(`/api/${split[0]}`)
+        const resp = await fetch(` https://us-central1-pastify-app.cloudfunctions.net/api/${split[0]}`)
         const data = await resp.json()
 
         let config = []
