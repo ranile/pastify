@@ -4,7 +4,13 @@ import { Firestore, Timestamp } from "@google-cloud/firestore"
 
 const publicDir = path.join(__dirname, '../public/')
 
-const firestore = new Firestore()
+const firestore = new Firestore({
+    projectId: 'pastify-app',
+    credentials: {
+        client_email: process.env.CLIENT_EMAIL,
+        private_key: process.env.PRIVATE_KEY,
+    }
+})
 const pastes = firestore.collection('pastes')
 
 const app = express()
@@ -43,4 +49,4 @@ app.get('/*', (request, response) => {
     response.sendFile(`${publicDir}/index.html`)
 })
 
-app.listen(process.env.PORT, () => console.log('Listening on post 5000'))
+app.listen(process.env.PORT, () => console.log(`Listening on post ${process.env.PORT}`))
