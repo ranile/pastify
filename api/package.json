@@ -18,12 +18,12 @@
   },
   "homepage": "https://github.com/hamza1311/pastify#readme",
   "devDependencies": {
-    "@types/express": "^4.17.6",
-    "@types/node": "^14.0.13",
-    "typescript": "^3.9.5"
   },
   "dependencies": {
     "@google-cloud/firestore": "^3.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "@types/express": "^4.17.6",
+    "@types/node": "^14.0.13",
+    "typescript": "^3.9.5"
   }
 }
