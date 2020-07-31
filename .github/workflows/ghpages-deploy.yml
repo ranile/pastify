@@ -1,5 +1,5 @@
 
-name: Gradle Tests
+name: Build and deploy
 
 on:
   push:

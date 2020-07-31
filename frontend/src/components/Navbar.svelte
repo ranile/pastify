@@ -118,7 +118,7 @@
         <img
                 class="logo"
                 alt="Logo"
-                src="/icon.svg"
+                src="icon.svg"
         />
         <h1 class="title">Pastify</h1>
     </section>
