@@ -15,7 +15,7 @@
         const ref = await db.collection('pastes').add({
             content: contentToSave,
             createdAt: firebase.firestore.Timestamp.now(),
-            createdBy: auth.currentUser.uid ?? null,
+            createdBy: (auth.currentUser && auth.currentUser.uid) || null,
         })
         navigate(`/show/${ref.id}`)
     }
