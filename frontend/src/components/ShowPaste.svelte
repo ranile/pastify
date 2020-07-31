@@ -1,107 +1,110 @@
-<!--suppress HtmlUnknownTarget -->
-<svelte:head>
-    <script src='/prism/prism.js'></script>
-    <link rel='stylesheet' href='/prism/prism.css'>
-</svelte:head>
-
 <script>
-    import NavBar from './Navbar.svelte'
-    import {onMount} from "svelte";
+    import {Doc} from 'sveltefire';
+    import {navigate} from 'svelte-routing'
 
-    let content = ''
+    import hljs from 'highlight.js/lib/core';
+    import javascript from 'highlight.js/lib/languages/javascript';
+    import kotlin from 'highlight.js/lib/languages/kotlin';
+    import python from 'highlight.js/lib/languages/python';
+    import rust from 'highlight.js/lib/languages/rust';
+    import java from 'highlight.js/lib/languages/java';
+    import json from 'highlight.js/lib/languages/json';
+    import yaml from 'highlight.js/lib/languages/yaml';
+    import markdown from 'highlight.js/lib/languages/markdown';
+    import htmlbars from 'highlight.js/lib/languages/htmlbars';
+    import css from 'highlight.js/lib/languages/css';
+    import scss from 'highlight.js/lib/languages/scss';
+    import typescript from 'highlight.js/lib/languages/typescript';
+    import sql from 'highlight.js/lib/languages/sql';
+
+    // import 'highlight.js/styles/atom-one-dark-reasonable.css';
+    import 'highlight.js/styles/ir-black.css';
+    import Navbar from "./Navbar.svelte";
+    // import 'highlight.js/styles/github.css';
+
+    hljs.registerLanguage('javascript', javascript);
+    hljs.registerLanguage('kotlin', kotlin);
+    hljs.registerLanguage('python', python);
+    hljs.registerLanguage('rust', rust);
+    hljs.registerLanguage('java', java);
+    hljs.registerLanguage('json', json);
+    hljs.registerLanguage('yaml', yaml);
+    hljs.registerLanguage('markdown', markdown);
+    hljs.registerLanguage('sql', sql);
+    hljs.registerLanguage('htmlbars', htmlbars);
+    hljs.registerLanguage('css', css);
+    hljs.registerLanguage('scss', scss);
+    hljs.registerLanguage('typescript', typescript);
 
     export let id;
-    let isHighlighted = false
+    export let location;
+    let line = location.href.split('#L')[1]
+    let selectedLine = line && parseInt(line)
+    console.log('selected', line, selectedLine)
 
-    onMount(async () => {
-        const split = id.split('.')
-        const lang = split[1]
+    const formatIndex = (index, total) => {
+        let amountToAppend = total - index.toString().length;
+        console.log(amountToAppend)
+        return '&nbsp;'.repeat(amountToAppend) + index.toString()
+    }
 
-        const resp = await fetch(` https://us-central1-pastify-app.cloudfunctions.net/api/${split[0]}`)
-        const data = await resp.json()
+    const highlight = (code) => {
+        const hl = hljs.highlightAuto(code)
+        console.log(hl)
+        const html = hl.value
+        const split = html.split('\n')
+        const total = split.length.toString().length
 
-        let config = []
-        switch (lang) {
-            case 'kt':
-            case 'kotlin':
-                config = [Prism.languages.kotlin, 'kotlin']
-                break;
+        return split.map((line, index) => {
+            return {total, line, index}
+        })
+    }
 
-            case 'py':
-            case 'python':
-                config = [Prism.languages.python, 'python']
-                break;
-
-            case 'ts':
-            case 'typescript':
-                config = [Prism.languages.typescript, 'typescript']
-                break;
-
-            case 'js':
-            case 'javascript':
-                config = [Prism.languages.javascript, 'javascript']
-                break;
-
-            case 'yml':
-            case 'yaml':
-                config = [Prism.languages.yaml, 'yaml']
-                break;
-
-            case 'html':
-                config = [Prism.languages.html, 'html']
-                break;
-
-            case 'xml':
-                config = [Prism.languages.xml, 'xml']
-                break;
-
-            case 'java':
-                config = [Prism.languages.java, 'java']
-                break;
-
-            case 'css':
-                config = [Prism.languages.css, 'css']
-                break;
-
-            case 'json':
-                config = [Prism.languages.json, 'json']
-                break;
-
-            case 'sql':
-                config = [Prism.languages.sql, 'sql']
-                break;
-        }
-        if (config.length === 2) {
-            content = Prism.highlight(data['content'], config[0], config[1])
-            isHighlighted = true
-        } else {
-            content = data['content']
-        }
-    });
-
+    const selectLine = (lineNumber) => {
+        selectedLine = parseInt(lineNumber)
+        navigate(`/show/${id}#L${selectedLine}`)
+    }
 </script>
 
 <style type="text/scss">
+
     pre {
         padding: 1em;
         background-color: #121212;
         code {
-            font-size: 1.2em;
+            font-family: 'JetBrainsMono', monospace;
+
+            span {
+                padding-right: 0.5em;
+            }
         }
+    }
+
+    .selected-line {
+        background-color: #4D3B24;
     }
 </style>
 
 
 <main class="show-paste">
-    <nav class="navbar">
-        <NavBar/>
-    </nav>
+    <Doc path={`pastes/${id}`} let:data={paste}>
+        <Navbar/>
 
-    <pre><code>
-        {#if isHighlighted}
-            {@html content}
-        {:else}
-            {content}
-        {/if}
-    </code></pre>
+        <!-- Default Slot -->
+        <pre>
+            {#each highlight(paste.content) as data}
+                <code class="{selectedLine === data.index + 1 ? 'selected-line' : ''}"><span class="unselectable clickable" on:click={() => selectLine(data.index + 1)}>{@html formatIndex(data.index + 1, data.total)} </span>{@html data.line}<br/></code>
+            {/each}
+        </pre>
+
+        <!-- Only shown when loading -->
+        <div slot="loading">
+            Loading...
+        </div>
+
+        <!-- Shown on error or if nothing loads after maxWait time-->
+        <div slot="fallback">
+            Fuck!! Some shit went down
+        </div>
+    </Doc>
 </main>

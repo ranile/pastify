@@ -1,59 +1,31 @@
 <script>
+    import {navigate} from "svelte-routing";
     import Navbar from "./Navbar.svelte";
-    import { navigate } from "svelte-routing";
 
-    let content = 'content'
-
-    const save = async (content) => {
-        const resp = await fetch(' https://us-central1-pastify-app.cloudfunctions.net/api', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ content: content })
-        });
-
-        const json = await resp.json()
-        navigate(`/show/${json.id}`, { replace: true })
-
-    }
-
-    const reset = () => {
-        content = '';
-    }
+    let content = '';
 
 </script>
 
 <style type="text/scss">
-    .home {
+    main {
         display: flex;
         flex-direction: column;
 
-        .paste-input {
-            background-color: #121212;
+        textarea {
+            background-color: var(--code-background-color);
             font-family: 'JetBrainsMono', monospace;
-            color: white;
             height: 90vh;
-            padding: 0.5em;
+            padding: 0.5em 1em;
             border: none;
+            color: var(--text-color);
         }
 
     }
 </style>
 
-<main class="home">
-    <nav class="navbar">
-        <Navbar/>
-        <span class="separator"></span>
-        <div class="buttons">
-            <button class="button" on:click="{save(content)}">Save</button>
-            <button class="button" on:click="{reset()}">Reset</button>
-        </div>
-    </nav>
-
+<main>
+    <Navbar contentToSave={content}/>
     <textarea
-            class="paste-input"
             spellcheck="false"
             bind:value={content}
     ></textarea>

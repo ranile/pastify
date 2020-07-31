@@ -1,1 +1,0 @@
-# Pastify CLI

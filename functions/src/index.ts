@@ -9,9 +9,10 @@ app.use(bodyParser.json())
 app.use(cors())
 
 admin.initializeApp({
-    //credential: admin.credential.cert(require('/home/hamza/Documents/secrets/pastify-app-firebase-adminsdk-zdh08-2e37b0d316.json'))
+    // credential: admin.credential.cert(require('/home/hamza/Documents/secrets/pastify-app-firebase-adminsdk-zdh08-2e37b0d316.json'))
     credential: admin.credential.applicationDefault()
 })
+
 const firestore = admin.firestore()
 const pastes = firestore.collection('pastes')
 
@@ -26,7 +27,7 @@ app.get('/:id', async (request, response) => {
     response.send({
         id: doc.id,
         content: data.content,
-        createdAt: data.createdAt.seconds
+        createdAt: data.createdAt.seconds,
     });
 })
 
@@ -42,6 +43,7 @@ app.post('/', async (request, response) => {
     })
     response.status(201).send({ id: doc.id })
 })
+
 
 // noinspection JSUnusedGlobalSymbols
 export const api = functions.https.onRequest(app)
