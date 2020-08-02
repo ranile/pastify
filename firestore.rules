@@ -7,8 +7,7 @@ service cloud.firestore {
         match /pastes/{paste_id} {
             allow get;
             allow create;
-            allow update: if true;
-            allow delete: if request.auth.uid == resource.data.createdBy;
+            allow update, delete: if request.auth.uid == resource.data.createdBy;
         }
     }
 }
