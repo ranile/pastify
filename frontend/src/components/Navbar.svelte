@@ -6,18 +6,34 @@
 
 
     export let contentToSave = undefined;
+    export let currentPaste = undefined;
+
     const app = getContext('firebase').getFirebase();
     const db = app.firestore();
     const auth = app.auth()
 
-    const save = async () => {
-        console.log(contentToSave);
-        const ref = await db.collection('pastes').add({
-            content: contentToSave,
-            createdAt: firebase.firestore.Timestamp.now(),
-            createdBy: (auth.currentUser && auth.currentUser.uid) || null,
-        })
-        navigate(`/show/${ref.id}`)
+    const saveOrUpdate = async () => {
+        if (currentPaste === undefined) {
+            console.log('saving', contentToSave);
+            const ref = await db.collection('pastes').add({
+                content: contentToSave,
+                createdAt: firebase.firestore.Timestamp.now(),
+                createdBy: (auth.currentUser && auth.currentUser.uid) || null,
+            })
+            navigate(`/show/${ref.id}`)
+        } else {
+            console.log('updating id', currentPaste.id, ' with ', contentToSave);
+            await db.collection('pastes').doc(currentPaste.id).update({
+                content: contentToSave
+            })
+            navigate(`/show/${currentPaste.id}`)
+        }
+    }
+
+    const deletePaste = async () => {
+        await db.collection('pastes').doc(currentPaste.id).delete()
+        navigate('/')
+        console.log(currentPaste, currentPaste.delete)
     }
 </script>
 
@@ -51,7 +67,6 @@
             display: flex;
             gap: 1rem;
             align-self: center;
-            margin-right: 1rem;
         }
     }
 
@@ -89,11 +104,13 @@
         }
 
     }
+
     /* No idea why i can't nest these but it won't work if i try*/
     .dropdown:hover {
         .dropdown-content {
             display: block;
         }
+
         button {
             background-color: var(--background-color-secondary);
         }
@@ -107,6 +124,7 @@
         display: flex;
         align-items: center;
         gap: 0.5em;
+
         :last-child {
             font-size: 1.3em !important;
         }
@@ -123,33 +141,39 @@
         <h1 class="title">Pastify</h1>
     </section>
 
-    <section class="buttons">
-        {#if contentToSave !== undefined}
-            <span title="Save" class="material-icons clickable icon" on:click={save}>save</span>
+    {#if contentToSave !== undefined}
+        <section class="buttons">
+            <span title="Save" class="material-icons clickable icon" on:click={saveOrUpdate}>save</span>
+        </section>
+    {/if}
+
+    <User persist={sessionStorage} let:user={user} let:auth={auth} on:user>
+        {#if currentPaste !== undefined && currentPaste.createdBy === user.uid} <!--maybe show buttons buttons but grayed out-->
+            {#if contentToSave === undefined}
+                <span title="Edit" class="material-icons clickable icon"
+                      on:click={() => navigate(`/edit/${currentPaste.id}`)}>create</span>
+            {/if}
+            <span title="Delete" class="material-icons clickable icon" on:click={deletePaste}>delete</span>
         {/if}
-    </section>
 
-    <section class="left">
-        <User persist={sessionStorage} let:user={user} let:auth={auth} on:user>
-            <div class="dropdown">
-                <button class="icon-container">
-                    <span class="material-icons icon">person</span>
-                    <span>{user.displayName}</span>
-                </button>
-                <div class="dropdown-content">
-                    <button class="clickable">Modify profile</button>
-                    <button class="clickable" on:click={() => auth.signOut()}>Logout</button>
-                </div>
+        <div class="dropdown left">
+            <button class="icon-container">
+                <span class="material-icons icon">person</span>
+                <span>{user.displayName}</span>
+            </button>
+            <div class="dropdown-content">
+                <button class="clickable">Modify profile</button>
+                <button class="clickable" on:click={() => auth.signOut()}>Logout</button>
             </div>
+        </div>
 
-            <div class="buttons" slot="signed-out">
-                <span on:click={() => navigate('/login')} title="Login"  class="clickable icon-container">
-                    <span class="material-icons icon">person</span>
-                    Login
-                </span>
+        <div class="buttons left" slot="signed-out">
+            <span on:click={() => navigate('/login')} title="Login" class="clickable icon-container">
+                <span class="material-icons icon">person</span>
+                Login
+            </span>
 
-            </div>
-        </User>
-    </section>
+        </div>
+    </User>
 
 </nav>

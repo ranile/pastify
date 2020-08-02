@@ -6,6 +6,7 @@
     import ShowPaste from "./components/ShowPaste.svelte";
     import Home from "./components/Home.svelte";
     import Login from "./components/Login.svelte";
+    import EditPaste from "./components/EditPaste.svelte";
 
     import firebase from "firebase/app";
     import 'firebase/firestore';
@@ -24,26 +25,32 @@
         measurementId: "G-VLM54TKM2K"
     }
 
+    firebase.analytics.isSupported().then(shouldUseAnalytics => {
+        if (shouldUseAnalytics) {
+            firebase.analytics()
+        }
+    })
+
     firebase.initializeApp(firebaseConfig)
 
-    let db = firebase.firestore()
+    /*let db = firebase.firestore()
     if (location.hostname === "localhost") {
         db.settings({
             host: "localhost:8080",
             ssl: false
         });
-    }
+    }*/
 
     export let url = "";
 </script>
 
-
-<FirebaseApp {firebase}>
+<FirebaseApp {firebase} perf>
     <Router url="{url}">
         <div>
             <Route path="/" component="{Home}"/>
             <Route path="login" component="{Login}"/>
             <Route path="show/:id" component="{ShowPaste}"/>
+            <Route path="edit/:id" component="{EditPaste}"/>
         </div>
     </Router>
 </FirebaseApp>
@@ -98,6 +105,15 @@
 
     :global(.clickable:hover) {
         color: var(--nav-icon-hover-color);
+    }
+
+    :global(.content-input) {
+        background-color: var(--code-background-color);
+        font-family: 'JetBrainsMono', monospace;
+        height: 90vh;
+        padding: 0.5em 1em;
+        border: none;
+        color: var(--text-color);
     }
 
 </style>

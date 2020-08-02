@@ -87,8 +87,8 @@
 
 
 <main class="show-paste">
-    <Doc path={`pastes/${id}`} let:data={paste}>
-        <Navbar/>
+    <Doc path={`pastes/${id}`} let:data={paste} let:ref={ref}>
+        <Navbar currentPaste="{{id: ref.id, ...paste}}"/>
 
         <!-- Default Slot -->
         <pre>

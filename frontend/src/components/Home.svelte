@@ -10,22 +10,13 @@
     main {
         display: flex;
         flex-direction: column;
-
-        textarea {
-            background-color: var(--code-background-color);
-            font-family: 'JetBrainsMono', monospace;
-            height: 90vh;
-            padding: 0.5em 1em;
-            border: none;
-            color: var(--text-color);
-        }
-
     }
 </style>
 
 <main>
     <Navbar contentToSave={content}/>
     <textarea
+            class="content-input"
             spellcheck="false"
             bind:value={content}
     ></textarea>
