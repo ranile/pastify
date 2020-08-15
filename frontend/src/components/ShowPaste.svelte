@@ -71,6 +71,8 @@
     pre {
         padding: 1em;
         background-color: #121212;
+        overflow-y: auto;
+
         code {
             font-family: 'JetBrainsMono', monospace;
 
