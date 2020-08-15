@@ -1,0 +1,17 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [ senpai ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+      - run: cd frontend
+      - run: npm ci
+      - run: npm run build

@@ -10,19 +10,19 @@
     "@rollup/plugin-commonjs": "^12.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
     "node-sass": "^4.14.1",
-    "rollup": "^2.3.4",
+    "rollup": "^2.26.0",
     "rollup-plugin-css-only": "^2.1.0",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
-    "rollup-plugin-terser": "^5.1.2",
-    "svelte": "^3.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.24.1",
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "firebase": "^7.17.1",
+    "firebase": "^7.18.0",
     "highlight.js": "^10.1.2",
-    "sirv-cli": "^1.0.0",
-    "svelte-preprocess": "^4.0.9",
+    "sirv-cli": "^1.0.6",
+    "svelte-preprocess": "^4.0.12",
     "svelte-routing": "^1.4.2",
     "sveltefire": "^0.1.5"
   }
