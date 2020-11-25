@@ -7,7 +7,7 @@ import preprocess from 'svelte-preprocess';
 import css from "rollup-plugin-css-only";
 
 const production = !process.env.ROLLUP_WATCH;
-const publicDir = './public'
+const publicDir = 'public'
 
 function serve() {
 	let server;
@@ -39,14 +39,14 @@ export default {
 		file: `${publicDir}/build/bundle.js`
 	},
 	plugins: [
-		css({ output: "public/build/extra.css" }),
+		css({ output: `${publicDir}/build/extra.css` }),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
 			// we'll extract any component CSS out into
 			// a separate file - better for performance
 			css: css => {
-				css.write(`${publicDir}/build/bundle.css`);
+				css.write(`bundle.css`);
 			},
 			preprocess: preprocess()
 		}),
