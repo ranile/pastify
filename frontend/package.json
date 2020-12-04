@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "firebase": "^7.24.0",
-    "highlight.js": "^10.4.0",
+    "highlight.js": "^10.4.1",
     "sirv-cli": "^1.0.8",
     "svelte-preprocess": "^4.6.1",
     "svelte-routing": "^1.4.2",
