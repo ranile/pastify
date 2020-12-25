@@ -75,6 +75,7 @@
 
         code {
             font-family: 'JetBrainsMono', monospace;
+            white-space: pre-wrap;
 
             span {
                 padding-right: 0.5em;
