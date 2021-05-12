@@ -1,0 +1,54 @@
+{% extends "base" %}
+
+{% block nav_buttons %}
+{% endblock nav_buttons %}
+
+{% block head_content %}
+<style>
+    pre {
+        padding: 0.5em;
+        overflow-y: auto;
+    }
+
+    code {
+        font-family: 'JetBrains Mono', monospace;
+        white-space: pre-wrap;
+    }
+
+    .line-number {
+        color: var(--nav-icon-color);
+        padding-right: 1.5em;
+    }
+
+    .hljs {
+        padding: 0.2em !important;
+    }
+</style>
+
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/ir-black.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+{% endblock head_content %}
+
+{% block content %}
+
+<pre><code>{{ content }}</code></pre>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const content = document.querySelector("pre code").textContent
+
+        const total = content.split("\n").length.toString().length
+        const formatIndex = (index) => {
+            let amountToAppend = total - index.toString().length;
+            return '&nbsp;'.repeat(amountToAppend) + index.toString()
+        }
+
+        document.querySelector("pre").innerHTML = content.split("\n").map((it, index) => {
+            const lineNumberSpan = `<span class="line-number unselectable">${formatIndex(index + 1)}</span>`
+            return `<code>${lineNumberSpan}${hljs.highlightAuto(it).value}<br/></code>`
+        }).join("")
+    });
+</script>
+
+{% endblock content %}

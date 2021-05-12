@@ -1,0 +1,38 @@
+[package]
+name = "pastify"
+version = "0.1.0"
+authors = ["Hamza <muhammadhamza1311@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+tokio = { version = "1", features = ["rt", "rt-multi-thread", "io-util", "io-std", "macros"] }
+reqwest = { version = "0.11.2", features = ["json"] }
+serde = { version = "1.0.125", features = ["derive"] }
+thiserror = "1.0.24"
+serde_json = "1.0.64"
+
+# cli
+
+clap = { version = "2", optional = true }
+structopt = { version = "0.3.21", optional = true }
+color-eyre = { version = "0.5", optional = true }
+
+# api
+
+rocket = { git = "https://github.com/SergioBenitez/Rocket/", optional = true }
+rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket/", features = ["json", "tera_templates"], optional = true }
+
+[features]
+emulator = []
+cli = ["clap", "structopt", "color-eyre"]
+api = ["rocket", "rocket_contrib"]
+
+[[bin]]
+name = "pastify"
+path = "src/cli.rs"
+required-features = ["cli"]
+
+[[bin]]
+name = "api"
+path = "src/api.rs"
+required-features = ["api"]

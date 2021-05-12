@@ -1,0 +1,44 @@
+{% extends "base" %}
+
+{% block nav_buttons %}
+<span title="Save" class="material-icons clickable" id="save-button">save</span>
+{% endblock nav_buttons %}
+
+{% block head_content %}
+<style>
+    #content-input {
+        background-color: var(--code-background-color);
+        font-family: 'JetBrains Mono', monospace;
+        height: calc(100vh - var(--nav-height));
+        width: 100%;
+        padding: 0.5em 1em;
+        border: none;
+        color: var(--text-color);
+    }
+</style>
+{% endblock head_content %}
+
+{% block content %}
+<textarea id="content-input" spellcheck="false"></textarea>
+
+<script>
+    document.getElementById("save-button").addEventListener("click", async () => {
+        const textarea = document.getElementById("content-input")
+        const value = textarea.value
+        console.log(value)
+        const resp = await fetch("/api/paste", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({content: value})
+        })
+        console.log(resp)
+        if (resp.ok) {
+            const json = await resp.json()
+            window.location.pathname = `/${json.id}`
+        }
+        textarea.value = ""
+    })
+</script>
+{% endblock content %}

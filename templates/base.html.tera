@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pastify</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    {% block head_content %}{% endblock head_content %}
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        :root {
+            --text-color: #d7d7d7;
+            --background-color: #0b0b0b;
+            --code-background-color: #121212;
+            --nav-icon-color: rgba(255, 255, 255, 0.7);
+            --nav-icon-hover-color: rgba(255, 255, 255, 1);
+            --background-color-secondary: #212121;
+            --border-color: #226699;
+            --link-color: #731bbf;
+            --nav-height: 3.5em;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            height: 100vh;
+            font-size: 16px;
+        }
+
+        nav {
+            background-color: var(--background-color-secondary);
+            gap: 4em;
+            height: var(--nav-height);
+            padding: 0.5em 1em;
+        }
+
+        h1 {
+            font-size: 1.65em;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .logo {
+            width: 2em;
+            height: 2em;
+        }
+
+        .clickable {
+            cursor: pointer;
+        }
+
+        .unselectable {
+            user-select: none;
+        }
+
+        .flex-gap-half {
+            gap: 0.5em;
+        }
+
+        .flex-gap-1 {
+            gap: 1em;
+        }
+    </style>
+</head>
+<body>
+<nav class="flex items-center unselectable">
+    <section class="flex items-center flex-gap-half">
+        <img src="https://pastify-app.web.app/icon.svg" alt="logo" class="logo"/>
+        <h1>Pastify</h1>
+    </section>
+
+    <section class="flex flex-gap-1">
+        {% block nav_buttons %}{% endblock nav_buttons %}
+    </section>
+</nav>
+{% block content %}{% endblock content %}
+</body>
+</html>
