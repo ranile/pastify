@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request }) => {
     }
 
     const fileContent = await file.text();
-    const paste = await createPaste(fileContent)
+    const paste = await createPaste(fileContent);
 
     return json({ id: paste });
 };

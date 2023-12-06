@@ -12,7 +12,7 @@ export const load: PageLoad = async ({ params }) => {
         id = pasteId;
         languageHint = lang;
     } else {
-        id = params.id
+        id = params.id;
     }
 
     const paste = await getPaste(id);
@@ -20,11 +20,10 @@ export const load: PageLoad = async ({ params }) => {
         throw error(404, 'Not found');
     }
 
-
     const lang = languageHint ? mapLangHintToLanguage(languageHint) : detectLang(paste.content);
     return {
         paste,
-        language: lang
+        language: lang,
     };
 };
 

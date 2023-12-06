@@ -7,14 +7,14 @@ export const GET: RequestHandler = async ({ params }) => {
     if (id === undefined) {
         throw error(400, 'id is required.');
     }
-    const paste = await getPaste(id)
+    const paste = await getPaste(id);
     if (paste === null) {
         throw error(404, 'Not found');
     }
 
-    return new Response(paste.content,  {
+    return new Response(paste.content, {
         headers: {
-            'Content-Type': 'text/plain'
-        }
-    })
+            'Content-Type': 'text/plain',
+        },
+    });
 };

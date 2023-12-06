@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
     import { onDestroy, onMount } from 'svelte';
     import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
     import '$lib/monaco';
@@ -29,7 +29,7 @@
         editor = monaco.editor.create(editorContainer, {
             theme: 'vs-dark',
             automaticLayout: true,
-            readOnly: readonly
+            readOnly: readonly,
         });
         const model = monaco.editor.createModel(value, language);
 
@@ -46,7 +46,7 @@
     });
 </script>
 
-<div class='container' bind:this={editorContainer} style:height />
+<div class="container" bind:this={editorContainer} style:height />
 
 <style>
     .container {
