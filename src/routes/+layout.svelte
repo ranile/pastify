@@ -1,21 +1,21 @@
 <script>
-    import firebase from '$lib/firebase/app.ts';
+  import firebase from '$lib/firebase/app.ts';
 
-    console.info('running app', firebase.name)
+  console.info('running app', firebase.name);
 </script>
 
 <slot />
 
 <style>
-    :global(*) {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+  :global(*) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    :global(body) {
-        font-family: system-ui;
-        font-size: 16px;
-        line-height: 1.5;
-    }
+  :global(body) {
+    font-family: system-ui;
+    font-size: 16px;
+    line-height: 1.5;
+  }
 </style>
