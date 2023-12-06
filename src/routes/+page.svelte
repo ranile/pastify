@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
   import Monaco from '$lib/Monaco.svelte';
   import TopBar from '$lib/TopBar.svelte';
   import { createPaste } from '$lib/firebase/app.ts';

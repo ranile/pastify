@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from 'svelte';
 
   export let logoSrc = 'https://pastify.xyz/icon.svg';
   export let logoAlt = 'Pastify logo';
   export let title = 'Pastify';
   export let topBarHeight = '3.3rem';
-  export let buttonText;
+  export let buttonText: string;
 
   const dispatch = createEventDispatcher();
 
