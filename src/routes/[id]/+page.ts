@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
 import type { PageLoad } from './$types';
 import { getPaste } from '$lib/firebase/app';
+// @ts-expect-error lang-detector has no types and I can't be bothered to add them
 import detectLang from 'lang-detector';
 
 export const load: PageLoad = async ({ params }) => {
