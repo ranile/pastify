@@ -17,7 +17,7 @@ export const load: PageLoad = async ({ params }) => {
 
     const paste = await getPaste(id);
     if (paste === null) {
-        throw error(404, 'Not found');
+        error(404, 'Not found');
     }
 
     const lang = languageHint ? mapLangHintToLanguage(languageHint) : detectLang(paste.content);

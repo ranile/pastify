@@ -5,11 +5,11 @@ import { getPaste } from '$lib/firebase/app';
 export const GET: RequestHandler = async ({ params }) => {
     const id = params.id;
     if (id === undefined) {
-        throw error(400, 'id is required.');
+        error(400, 'id is required.');
     }
     const paste = await getPaste(id);
     if (paste === null) {
-        throw error(404, 'Not found');
+        error(404, 'Not found');
     }
 
     return new Response(paste.content, {

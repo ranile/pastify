@@ -15,7 +15,7 @@ export const POST: RequestHandler = async ({ request }) => {
     }
 
     if (file === undefined || count !== 1) {
-        throw error(400, 'one and only one file should be passed.');
+        error(400, 'one and only one file should be passed.');
     }
 
     const fileContent = await file.text();
