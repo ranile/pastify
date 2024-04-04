@@ -4,6 +4,10 @@
     console.info('running app', firebase.name);
 </script>
 
+<svelte:head>
+    <title>Pastify</title>
+</svelte:head>
+
 <slot />
 
 <style>

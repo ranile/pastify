@@ -1,7 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from 'svelte';
 
-    export let logoSrc = 'https://pastify.xyz/icon.svg';
     export let logoAlt = 'Pastify logo';
     export let title = 'Pastify';
     export let topBarHeight = '3.3rem';
@@ -17,7 +16,7 @@
 <div class="top-bar" style:height={topBarHeight}>
     <div class="content">
         <a href="/" class="left">
-            <img src={logoSrc} alt={logoAlt} class="logo" />
+            <img src="/icon.svg" alt={logoAlt} class="logo" />
             <h1 class="title">{title}</h1>
         </a>
         <button class="save-button" on:click={handleClick}>
