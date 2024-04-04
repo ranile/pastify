@@ -8,7 +8,9 @@
     let Monaco: ComponentType<Monaco> | undefined;
     let topBarHeight = '3.3rem';
 
-    const actionButtonClick = () => {};
+    const actionButtonClick = () => {
+        // TODO: copy link to clipboard
+    };
 
     export let data: PageData;
     $: content = data.paste.content;

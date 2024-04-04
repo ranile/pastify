@@ -3,6 +3,8 @@ import type { RequestHandler } from './$types';
 import { createPaste } from '$lib/firebase/app';
 
 export const POST: RequestHandler = async ({ request }) => {
+    // TODO: if the body has the contents (e.g. if content-type if not multipart), use that instead of looking for a file
+
     const formData = await request.formData();
     let file;
     let count = 0;

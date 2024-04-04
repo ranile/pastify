@@ -1,3 +1,4 @@
+<!-- TODO: progressively enhance this page with Monaco editor -->
 <script lang="ts">
     import Monaco from '$lib/Monaco.svelte';
     import TopBar from '$lib/TopBar.svelte';
